@@ -2,6 +2,8 @@ package com.company;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Main {
@@ -61,6 +63,22 @@ public class Main {
         mainPanel.add(aJScrollPane);
         mainPanel.add(nextButton);
 
+        //Add menu Bar
+        JMenuBar menuBar = new JMenuBar();
+        JMenu fileMenu = new JMenu("File");
+        JMenuItem newMenuItem = new JMenuItem("New");
+        JMenuItem saveMenuItem = new JMenuItem("Save");
+
+        fileMenu.add(newMenuItem);
+        fileMenu.add(saveMenuItem);
+        menuBar.add(fileMenu);
+
+
+        frame.setJMenuBar(menuBar);
+
+        //Add actionListener
+        nextButton.addActionListener(new NextCardListener());
+
         //Add to the Frame
         frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
         frame.setSize(500, 600);
@@ -79,5 +97,12 @@ public class Main {
             }
         });
 
+    }
+
+    public class NextCardListener implements ActionListener{
+        @Override
+        public void actionPerformed (ActionEvent e){
+
+        }
     }
 }
