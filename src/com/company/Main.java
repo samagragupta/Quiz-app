@@ -4,7 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Main {
 
@@ -80,6 +85,8 @@ public class Main {
 
         //Add actionListener
         nextButton.addActionListener(new NextCardListener());
+//        newMenuItem.addActionListener();
+        saveMenuItem.addActionListener(new SavaMenuListener());
 
         //Add to the Frame
         frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
@@ -107,7 +114,40 @@ public class Main {
             Qanda card = new Qanda(question.getText(),answer.getText());
             cardList.add(card);
             clearCard();
-//            System.out.print(cardList.size());
+        }
+    }
+
+    public class SavaMenuListener implements ActionListener{
+        @Override
+        public void actionPerformed (ActionEvent e) {
+            Qanda card = new Qanda(question.getText(), answer.getText());
+            cardList.add(card);
+
+            //Save file dialog
+            JFileChooser fileSave = new JFileChooser();
+            fileSave.showSaveDialog(frame);
+            saveFile(fileSave.getSelectedFile());
+        }
+    }
+
+    private void saveFile(File selectedFile) {
+        try {
+
+            //We'll use BufferedWriter Class for efficiency reasons
+            BufferedWriter writer = new BufferedWriter(new FileWriter(selectedFile));
+
+            Iterator<Qanda> cardIterator = cardList.iterator();
+            while (cardIterator.hasNext()) {
+                Qanda card = (Qanda) cardIterator.next();
+                writer.write(card.getQuestion() + "/");
+                writer.write(card.getAnswer() + "\n");
+
+            }
+            writer.close(); // need to always close when done!
+
+        } catch (IOException e) {
+            System.out.println("Couldn't write to file");
+            e.printStackTrace();
         }
     }
 
@@ -116,4 +156,5 @@ public class Main {
         answer.setText("");
         question.requestFocus();
     }
+
 }
