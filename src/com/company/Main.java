@@ -11,7 +11,7 @@ public class Main {
     //Instance variables
     private JTextArea question;
     private JTextArea answer;
-//    private ArrayList<FlashCard> cardList;
+    private ArrayList<Qanda> cardList;
     private JFrame frame;
 
     public Main(){
@@ -76,6 +76,8 @@ public class Main {
 
         frame.setJMenuBar(menuBar);
 
+        cardList = new ArrayList<Qanda>(); //create an arrayList of Quizcards objects
+
         //Add actionListener
         nextButton.addActionListener(new NextCardListener());
 
@@ -102,7 +104,16 @@ public class Main {
     public class NextCardListener implements ActionListener{
         @Override
         public void actionPerformed (ActionEvent e){
-
+            Qanda card = new Qanda(question.getText(),answer.getText());
+            cardList.add(card);
+            clearCard();
+//            System.out.print(cardList.size());
         }
+    }
+
+    public void clearCard(){
+        question.setText("");
+        answer.setText("");
+        question.requestFocus();
     }
 }
