@@ -85,7 +85,7 @@ public class Main {
 
         //Add actionListener
         nextButton.addActionListener(new NextCardListener());
-//        newMenuItem.addActionListener();
+        newMenuItem.addActionListener(NewMenuListener);
         saveMenuItem.addActionListener(new SavaMenuListener());
 
         //Add to the Frame
@@ -127,6 +127,15 @@ public class Main {
             JFileChooser fileSave = new JFileChooser();
             fileSave.showSaveDialog(frame);
             saveFile(fileSave.getSelectedFile());
+        }
+    }
+
+    public class NewMenuListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            cardList.clear();
+            clearCard();
+
         }
     }
 
