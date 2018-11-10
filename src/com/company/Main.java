@@ -85,7 +85,7 @@ public class Main {
 
         //Add actionListener
         nextButton.addActionListener(new NextCardListener());
-        newMenuItem.addActionListener(NewMenuListener);
+        newMenuItem.addActionListener(new NewMenuListener());
         saveMenuItem.addActionListener(new SavaMenuListener());
 
         //Add to the Frame
